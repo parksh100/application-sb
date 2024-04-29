@@ -113,15 +113,14 @@ st.write(':bulb: 접수코드가 없으신 경우, 클릭해주세요.')
 button_html = """
     <style>
         .custom-button {
-            color: white;
+            color: white !important;
             background-color: blue;
             padding: 10px 15px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            text-align: center;
-            display: inline-block;
             text-decoration: none;
+         
         }
     </style>
     <a href='https://iso-quotesb.streamlit.app/' target="_blank" class="custom-button">접수코드 받기</a>
