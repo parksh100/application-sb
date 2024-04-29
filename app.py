@@ -124,7 +124,7 @@ button_html = """
             text-decoration: none;
         }
     </style>
-    <button href='https://iso-quotesb.streamlit.app/' target="_blank" class="custom-button">접수코드 받기</button>
+    <a href='https://iso-quotesb.streamlit.app/' target="_blank" class="custom-button">접수코드 받기</a>
 """
 st.markdown(button_html, unsafe_allow_html=True)
 
