@@ -109,7 +109,7 @@ st.set_page_config(
 
 st.title('ISO인증 심사 신청서')
 st.write('클릭 한 번이면 간편한 절차를 통해 공신력 있는 인증기관의 인증을 취득하실 수 있습니다.')
-st.write(':bulb: 견적번호가 없으신 경우, 클릭해주세요.')
+st.write(':bulb: 접수코드가 없으신 경우, 클릭해주세요.')
 button_html = """
     <style>
         .custom-button {
@@ -119,21 +119,24 @@ button_html = """
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
         }
     </style>
-    <button onclick="window.location.href='https://iso-quotesb.streamlit.app/';" class="custom-button">견적 확인하기</button>
+    <button href='https://iso-quotesb.streamlit.app/' target="_blank" class="custom-button">접수코드 받기</button>
 """
 st.markdown(button_html, unsafe_allow_html=True)
 
 st.divider()
 
 # 회사정보 입력
-st.subheader('[기본정보]')
-st.write(':rainbow[견적산출 시 발급된 견적번호를 입력하시면 작성하신 정보를 불러옵니다. 견적신청 시 선택한 사항과 일치하는지 확인해주세요. 필요 시 수정해주세요.]')
+st.subheader('주요정보')
+st.write(':rainbow[견적산출 시 발급된 접수코드를 입력하시면 작성하신 정보를 불러옵니다. 견적신청 시 선택한 사항과 일치하는지 확인해주세요. 필요 시 수정해주세요.]')
 
 quote_id = st.text_input(
-    '견적번호',
-    help='견적계산 시 발급된 견적번호를 입력해주세요.',
+    '접수코드',
+    help='견적계산 시 발급된 접수코드를 입력해주세요.',
 )
 
 db_data = get_applications(quote_id) if quote_id is not None else None
@@ -197,21 +200,21 @@ if quote_id:
         col1, col2 = st.columns(2)
 
         with col1:
-            company_name = st.text_input('회사명', value=company_name)
-            company_email = st.text_input('이메일', value=email, help='모든 안내는 이메일로 전송됩니다. 정확한 이메일 주소를 입력해주시고 가능하면 회사 대표이메일을 입력해주세요.')
+            company_name = st.text_input('기업명', value=company_name)
+            company_email = st.text_input('Email', value=email, help='모든 안내는 이메일로 전송됩니다. 정확한 이메일 주소를 입력해주시고 가능하면 회사 대표이메일을 입력해주세요.')
             contact_name = st.text_input('담당자명', placeholder='홍길동/과장', value=contact_name)
             contact = st.text_input('담당자 연락처', placeholder='010-1234-5678', value=contact)
-            product = st.text_input('제품명', value=product, help='대표적인 제품 및 서비스명을 입력해주세요. (ex. 화장품 제조업)')
+            product = st.text_input('제품/서비스', value=product, help='대표적인 제품 및 서비스명을 입력해주세요. (ex. 화장품 제조업)')
 
         with col2:
             biz_type = st.selectbox('업종', biz_type_options, index=default_biz_type_index, help='자세한 업종정보는 담당 심사원이 상세하게 파악합니다.', disabled=True)
             standards = st.multiselect('적용표준', standard_options, default=mapped_standards, disabled=True)
             audit_type = st.selectbox('심사유형', audit_type_options, index=default_audit_type_index, disabled=True)
             audit_fee  = st.text_input('심사비', value=f"{int(audit_fee):,}원" ,disabled=True)
-            all_support = st.checkbox('인증보장 패키지', value=all_support, disabled=True)
-            documents_support = st.checkbox('시스템 문선 준비 포함', value=documents_support, disabled=True)
-            internal_auditor = st.checkbox('부적합 시정조치 대응 포함', value=internal_auditor, disabled=True)
-            response_support = st.checkbox('심사응대 및 대응 포함', value=response_support, disabled=True)
+            all_support = st.checkbox('시스템 구축 지도/자문', value=all_support, disabled=True)
+            documents_support = st.checkbox('시스템 문서 지원', value=documents_support, disabled=True)
+            internal_auditor = st.checkbox('내부심사원교육', value=internal_auditor, disabled=True)
+            response_support = st.checkbox('심사대응 지원', value=response_support, disabled=True)
 
 
 
@@ -231,7 +234,7 @@ if quote_id:
 
             with st.spinner('이메일 전송 중입니다...'):
                 # 최대 시간을 20초로 설정
-                max_time = 30
+                max_time = 35
                 progress_bar = st.progress(0)
 
                 start_time = time.time()
@@ -259,9 +262,9 @@ if quote_id:
                     st.success("모든 처리가 완료되었습니다. 제출해주셔서 감사합니다!")
     else:
         # 데이터가 없는 경우의 처리
-        st.error("입력하신 견적번호에 해당하는 정보를 찾을 수 없습니다.")
+        st.error("입력하신 접수코드에 해당하는 정보를 찾을 수 없습니다.")
 else:
-    st.warning("견적번호를 입력하시면 견적정보를 불러옵니다.")
+    st.warning("접수코드를 입력하시면 정보를 불러옵니다.")
 
 
 st.divider()
