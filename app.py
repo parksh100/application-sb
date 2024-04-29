@@ -121,7 +121,7 @@ button_html = """
             cursor: pointer;
             text-align: center;
             display: inline-block;
-            text-decoration: none;
+            
         }
     </style>
     <a href='https://iso-quotesb.streamlit.app/' target="_blank" class="custom-button">접수코드 받기</a>
