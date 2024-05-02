@@ -156,10 +156,10 @@ if quote_id:
         standards = db_data[0]['standards']
         audit_type = db_data[0]['audit_type']
         audit_fee = db_data[0]['audit_fee']
-        all_support = db_data[0]['all_support']
-        documents_support = db_data[0]['documents_support']
+        all_support = db_data[0]['consulting']
+        documents_support = db_data[0]['document']
         internal_auditor = db_data[0]['internal_auditor']
-        response_support = db_data[0]['response_support']
+        response_support = db_data[0]['response']
 
         # 업종 목록 정의
         biz_type_options = ['제조업', '건설업','기타']
